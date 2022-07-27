@@ -1,0 +1,23 @@
+﻿@using AAC.AppMvc.Extensions
+@model IEnumerable<AAC.AppMvc.ViewModels.ProductViewModel>
+
+@{
+    ViewBag.Title = "Products list";
+}
+
+<h1><b>@ViewBag.Title</b></h1>
+<hr />
+
+@{
+    if (this.AllowExibition("Product", "Add"))
+    {
+        <p>
+            <a class="btn btn-info" href="@Url.Action("Create", "Products")">
+                New Product
+            </a>
+        </p>
+    }
+}
+
+
+@Html.Partial("_ProductsList")

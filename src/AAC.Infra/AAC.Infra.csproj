@@ -70,14 +70,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Context\MyDbContext.cs" />
-    <Compile Include="Data\Context\Mappings\AddressConfig.cs" />
-    <Compile Include="Data\Context\Mappings\ProductConfig.cs" />
-    <Compile Include="Data\Context\Mappings\ProviderConfig.cs" />
+    <Compile Include="Data\Mappings\AddressConfig.cs" />
+    <Compile Include="Data\Mappings\ProductConfig.cs" />
+    <Compile Include="Data\Mappings\ProviderConfig.cs" />
     <Compile Include="Data\Repository\AddressRepository.cs" />
     <Compile Include="Data\Repository\ProductRepository.cs" />
     <Compile Include="Data\Repository\ProviderRepository.cs" />
     <Compile Include="Data\Repository\Repository.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

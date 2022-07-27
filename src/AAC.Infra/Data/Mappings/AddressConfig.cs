@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using AAC.Business.Models.Providers;
 
-namespace AAC.Infra.Data.Context.Mappings
+namespace AAC.Infra.Data.Mappings
 {
     public class AddressConfig: EntityTypeConfiguration<Address>
     {

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AAC.Business.Models.Providers;
 
-namespace AAC.Business.Models.Services
+namespace AAC.Business.Models.Providers.Services
 {
     public interface IProviderService : IDisposable
     {

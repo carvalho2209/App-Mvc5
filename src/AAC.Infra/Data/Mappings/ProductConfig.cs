@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using AAC.Business.Models.Products;
 
-namespace AAC.Infra.Data.Context.Mappings
+namespace AAC.Infra.Data.Mappings
 {
     public class ProductConfig : EntityTypeConfiguration<Product>
     {

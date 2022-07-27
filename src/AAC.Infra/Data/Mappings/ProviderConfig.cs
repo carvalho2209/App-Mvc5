@@ -3,7 +3,7 @@ using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 using AAC.Business.Models.Providers;
 
-namespace AAC.Infra.Data.Context.Mappings
+namespace AAC.Infra.Data.Mappings
 {
     public class ProviderConfig : EntityTypeConfiguration<Provider>
     {
@@ -16,7 +16,7 @@ namespace AAC.Infra.Data.Context.Mappings
                 .HasMaxLength(200);
 
             Property(p => p.Document)
-                .HasMaxLength(14)
+                .HasMaxLength(9)
                 .HasColumnAnnotation("IX_Document",
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }))
                 .IsFixedLength();

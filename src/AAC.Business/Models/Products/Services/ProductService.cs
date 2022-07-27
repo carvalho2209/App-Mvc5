@@ -10,8 +10,8 @@ namespace AAC.Business.Models.Products.Services
     {
         private readonly IProductRepository _productRepository;
 
-        public ProductService(IProductRepository productRepository, INotificator notificator)
-            :base(notificator)
+        public ProductService(IProductRepository productRepository, 
+                              INotificator notificator) :base(notificator)
         {
             _productRepository = productRepository;
         }

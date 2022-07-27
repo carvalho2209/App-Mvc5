@@ -3,6 +3,6 @@
     public enum TypeProvider
     {
         PhysicalPerson = 1,
-        LegalPerson
+        LegalPerson = 2
     }
 }

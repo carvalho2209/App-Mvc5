@@ -1,0 +1,38 @@
+﻿@model AAC.AppMvc.ViewModels.ProviderViewModel
+@{
+    ViewData["Title"] = "Update Address";
+}
+
+<div class="modal-header">
+    <h4 class="modal-title">@ViewData["Title"]</h4>
+    <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+    </button>
+</div>
+
+<br />
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal col-md-offset-1">
+
+        @Html.HiddenFor(model => model.Address.ProviderId)
+        @Html.HiddenFor(model => model.Address.Id)
+
+        @Html.Partial("_Address")
+
+        <div class="modal-footer">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update Address" class="btn btn-success" />
+                <input type="button" class="btn btn-info" value="Close" data-dismiss="modal" />
+            </div>
+        </div>
+
+    </div>
+}
+
+<script>
+    SearchZip();
+</script>

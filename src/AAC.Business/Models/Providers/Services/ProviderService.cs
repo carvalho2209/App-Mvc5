@@ -3,10 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AAC.Business.Core.Notifications;
 using AAC.Business.Core.Services;
-using AAC.Business.Models.Providers;
 using AAC.Business.Models.Providers.Validations;
 
-namespace AAC.Business.Models.Services
+namespace AAC.Business.Models.Providers.Services
 {
     public class ProviderService : BaseService, IProviderService
     {
@@ -25,6 +24,9 @@ namespace AAC.Business.Models.Services
         
         public async Task Add(Provider provider)
         {
+            provider.Address.Id = provider.Id;
+            provider.Address.Provider = provider;
+
             if (!ExecuteValidation(new ProviderValidation(), provider)
                 || !ExecuteValidation(new AddressValidation(), provider.Address))
                 return;
@@ -65,7 +67,8 @@ namespace AAC.Business.Models.Services
         private async Task<bool> ProviderExists(Provider provider)
         {
             var actualProvider =
-                await _providerRepository.Search(p => p.Document == provider.Document && p.Id != provider.Id);
+                await _providerRepository.Search(p =>
+                    p.Document == provider.Document && p.Id != provider.Id);
 
             if (!actualProvider.Any())
                 return false;

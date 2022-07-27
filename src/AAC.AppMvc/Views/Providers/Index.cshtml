@@ -1,0 +1,52 @@
+﻿@using AAC.AppMvc.Extensions
+@model IEnumerable<AAC.AppMvc.ViewModels.ProviderViewModel>
+
+@{
+    ViewBag.Title = "Provider List";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr/>
+
+<p>
+    <a class="btn btn-info" href="@Url.Action("Create", "Providers")">New Provider</a>
+</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Document)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var iten in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => iten.Name)
+                </td>
+                <td>
+                    @this.FormatDocument(iten.TypeProvider, iten.Document)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => iten.Active)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" href="@Url.Action("Details", "Providers", new {id = iten.Id})"><span class="glyphicon glyphicon-search"></span></a>
+                    <a class="btn btn-info" href="@Url.Action("Edit", "Providers", new {id = iten.Id})"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Providers", new {id = iten.Id})"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

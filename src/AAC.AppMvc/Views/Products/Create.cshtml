@@ -1,0 +1,101 @@
+﻿@model AAC.AppMvc.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Product New ";
+}
+
+<h2>@ViewBag.Title </h2>
+<hr />
+
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data", id = "productForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProviderId, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+
+                @Html.DropDownListFor(model => model.ProviderId,
+                    new SelectList(Model.Providers, "Id", "Name"),
+                    string.Empty, new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.ProviderId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+
+                <div class="input-group">
+                    <input type="text" name="ImageName" id="ImageName" class="form-control">
+                    <span class="input-group-btn">
+                        <label class="btn btn-primary" for="ImageUpload">
+                            <input class="form-control" id="ImageUpload" name="ImageUpload" type="file" style="display: none"
+                                   onchange="$('#ImageName').val(this.files[0].name); $('#ImageUpload').blur();">
+                            <span class="glyphicon glyphicon-cloud-upload"></span>
+                        </label>
+                    </span>
+                </div>
+
+                @Html.ValidationMessage("ImageName", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Amount, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.CheckBoxFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                <a href="@Url.Action("Index", "Products")" class="btn btn-info">Return</a>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $('#productForm').submit(function () {
+            const amount = $('#Amount').val();
+            $('#Amount').val(amount.replace(".",""));
+        });
+
+        $("#Amount").attr("data-val-number", "Currency in invalid format.");
+
+        $("#ImageName").attr("data-val", "true");
+        $("#ImageName").attr("data-val-required", "Fill in the Image field.");
+    </script>
+}

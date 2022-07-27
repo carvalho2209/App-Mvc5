@@ -7,7 +7,7 @@ namespace AAC.Business.Core.Notifications
     {
         private readonly List<Notification> _notifications;
 
-        public Notificator(List<Notification> notifications)
+        public Notificator()
         {
             _notifications = new List<Notification>();
         }
@@ -17,14 +17,14 @@ namespace AAC.Business.Core.Notifications
             _notifications.Add(notification);
         }
 
-        public bool HasNotification()
-        {
-            return _notifications.Any();
-        }
-
         public List<Notification> GetNotifications()
         {
             return _notifications;
+        }
+
+        public bool HasNotification()
+        {
+            return _notifications.Any();
         }
     }
 }

@@ -8,10 +8,7 @@ namespace AAC.Infra.Data.Repository
 {
     public class ProviderRepository : Repository<Provider>, IProviderRepository
     {
-        public ProviderRepository(MyDbContext db, DbSet<Provider> dbSet) 
-            : base(db, dbSet)
-        {
-        }
+        public ProviderRepository(MyDbContext db) : base(db) { }
 
         public async Task<Provider> GetProviderAddress(Guid id)
         {
@@ -24,7 +21,7 @@ namespace AAC.Infra.Data.Repository
         {
             return await Db.Providers.AsNoTracking()
                 .Include(p => p.Address)
-                .Include(P => P.Products)
+                .Include(p => p.Products)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -15,9 +16,9 @@ namespace AAC.Infra.Data.Repository
         protected readonly MyDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        public Repository(MyDbContext db, DbSet<TEntity> dbSet)
+        public Repository(MyDbContext db)
         {
-            Db = new MyDbContext();
+            Db = db;
             DbSet = Db.Set<TEntity>();
         }
 
@@ -38,8 +39,25 @@ namespace AAC.Infra.Data.Repository
 
         public virtual async Task Add(TEntity entity)
         {
-            DbSet.Add(entity);
-            await SaveChanges();
+            try
+            {
+                DbSet.Add(entity);
+                await SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
         }
 
         public virtual async Task Update(TEntity entity)

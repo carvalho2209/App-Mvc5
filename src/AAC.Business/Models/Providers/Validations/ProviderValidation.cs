@@ -1,5 +1,4 @@
-﻿using AAC.Business.Core.Validations.Documents;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace AAC.Business.Models.Providers.Validations
 {
@@ -15,22 +14,33 @@ namespace AAC.Business.Models.Providers.Validations
 
             When(p => p.TypeProvider == TypeProvider.LegalPerson, () =>
             {
-                RuleFor(p => p.Document.Length).Equal(ValidationDocs.CnpjValidacao.TamanhoCnpj)
-                    .WithMessage(
-                        " The field needs to have {ComparisonValue} caracteres and was informed {PropertyValue}");
-
-                RuleFor(p => ValidationDocs.CnpjValidacao.Validar(p.Document)).Equal(true)
-                    .WithMessage(" The document is invalid.");
+                //RuleFor(p => p.Document.Length).Equal(ValidationDocs.CnpjValidacao.TamanhoCnpj)
+                //    .WithMessage(" The field needs to have {ComparisonValue} caracteres and was informed {PropertyValue}");
+                
+                RuleFor(d => d.Document)
+                    .NotEmpty()
+                    .WithMessage("The field {PropertyName} needs to be provided.")
+                    .Length(9)
+                    .WithMessage("The field {PropertyName} needs have {MinLength} caracteres");
+                
+                //RuleFor(p => ValidationDocs.CnpjValidacao.Validar(p.Document)).Equal(true)
+                //    .WithMessage(" The document is invalid.");
             });
 
             When(p => p.TypeProvider == TypeProvider.PhysicalPerson, () =>
             {
-                RuleFor(p => p.Document.Length).Equal(ValidationDocs.CpfValidacao.TamanhoCpf)
-                    .WithMessage(
-                        " The field needs to have {ComparisonValue} caracteres and was informed {PropertyValue}");
+                RuleFor(d => d.Document)
+                    .NotEmpty()
+                    .WithMessage("The field {PropertyName} needs to be provided.")
+                    .Length(9)
+                    .WithMessage("The field {PropertyName} needs have {MinLength} caracteres");
 
-                RuleFor(p => ValidationDocs.CpfValidacao.Validar(p.Document)).Equal(true)
-                    .WithMessage(" The document is invalid.");
+                //RuleFor(p => p.Document.Length).Equal(ValidationDocs.CpfValidacao.TamanhoCpf)
+                //    .WithMessage(
+                //        " The field needs to have {ComparisonValue} caracteres and was informed {PropertyValue}");
+
+                //RuleFor(p => ValidationDocs.CpfValidacao.Validar(p.Document)).Equal(true)
+                //    .WithMessage(" The document is invalid.");
             });
         }
     }

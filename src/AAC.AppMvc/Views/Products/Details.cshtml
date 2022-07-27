@@ -1,0 +1,58 @@
+﻿@model AAC.AppMvc.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Product Details - " + Model.Name;
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <img src="~/Images/@Model.Image" alt="@Model.Image" style="width: 300px; height: 428px" />
+    </div>
+    <div class="col-md-6">
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.ProviderId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Provider.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
+            <dd>
+                @Model.Amount.ToString("C")
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.RegistrationDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RegistrationDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Active)
+            </dd>
+        </dl>
+
+        <div>
+            <a class="btn btn-primary" href="@Url.Action("Edit", "Products", new {id = Model.Id})">Edit</a>
+            <a class="btn btn-info" href="javascript:window.history.back();">Return</a>
+        </div>
+    </div>
+</div>

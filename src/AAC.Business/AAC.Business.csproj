@@ -87,8 +87,8 @@
     <Compile Include="Models\Providers\Provider.cs" />
     <Compile Include="Models\Providers\TypeProvider.cs" />
     <Compile Include="Models\Providers\Validations\ProviderValidation.cs" />
-    <Compile Include="Models\Services\IProviderService.cs" />
-    <Compile Include="Models\Services\ProviderService.cs" />
+    <Compile Include="Models\Providers\Services\IProviderService.cs" />
+    <Compile Include="Models\Providers\Services\ProviderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

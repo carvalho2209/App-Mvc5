@@ -10,10 +10,7 @@ namespace AAC.Infra.Data.Repository
 {
     public class ProductRepository : Repository<Product>, IProductRepository
     {
-        public ProductRepository(MyDbContext db, DbSet<Product> dbSet)
-            : base(db, dbSet)
-        {
-        }
+        public ProductRepository(MyDbContext db) : base(db) { }
         
         public async Task<Product> GetProductProvider(Guid productId)
         {
