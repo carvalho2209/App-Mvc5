@@ -10,9 +10,11 @@ using AAC.Business.Core.Notifications;
 using AAC.Business.Models.Products;
 using AAC.Business.Models.Products.Services;
 using AAC.Business.Models.Providers;
+using AAC.AppMvc.Extensions;
 
 namespace AAC.AppMvc.Controllers
 {
+    [Authorize]
     public class ProductsController : BaseController
     {
         private readonly IProviderRepository _providerRepository;
@@ -33,6 +35,7 @@ namespace AAC.AppMvc.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [Route("product-list")]
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -42,6 +45,7 @@ namespace AAC.AppMvc.Controllers
             return View(products);
         }
 
+        [AllowAnonymous]
         [Route("product-data/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Details(Guid id)
@@ -54,6 +58,7 @@ namespace AAC.AppMvc.Controllers
             return View(productViewModel);
         }
 
+        [ClaimsAuthorize("Product", "Add")] 
         [Route("product-new")]
         [HttpGet]
         public async Task<ActionResult> Create()
@@ -63,6 +68,7 @@ namespace AAC.AppMvc.Controllers
             return View(product);
         }
 
+        [ClaimsAuthorize("Product", "Add")]
         [Route("product-new")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -82,6 +88,7 @@ namespace AAC.AppMvc.Controllers
             return RedirectToAction("Index");
         }
 
+        [ClaimsAuthorize("Product", "Edit")]
         [Route("product-edit/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
@@ -94,6 +101,7 @@ namespace AAC.AppMvc.Controllers
             return View(productViewModel);
         }
 
+        [ClaimsAuthorize("Product", "Edit")]
         [Route("product-edit/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -126,6 +134,7 @@ namespace AAC.AppMvc.Controllers
             return RedirectToAction("Index");
         }
 
+        [ClaimsAuthorize("Product", "Delete")]
         [Route("product-delete/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Delete(Guid id)
@@ -138,6 +147,7 @@ namespace AAC.AppMvc.Controllers
             return View(productViewModel);
         }
 
+        [ClaimsAuthorize("Product", "Delete")]
         [Route("product-delete/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
