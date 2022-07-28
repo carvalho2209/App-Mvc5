@@ -14,7 +14,12 @@ namespace AAC.AppMvc.Extensions
         public static MvcHtmlString AllowExibition(this MvcHtmlString value, string claimName, string claimValue)
         {
             return CustomAuthorization.ValidateClaimsUser(claimName, claimValue) ? value : MvcHtmlString.Empty;
-        } 
+        }
+
+        public static string AllowWithExibition(this UrlHelper urlHelper, string actionName, string controllerName, object routeValues, string claimName, string claimValue)
+        {
+            return CustomAuthorization.ValidateClaimsUser(claimName, claimValue) ? urlHelper.Action(actionName, controllerName, routeValues) : "";
+        }
 
         public static string FormatDocument(this WebViewPage page, int typePerson, string document)
         {
