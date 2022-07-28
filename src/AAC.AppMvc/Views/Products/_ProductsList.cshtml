@@ -43,19 +43,9 @@
                 </td>
                 <td class="text-right">
                     <a class="btn btn-warning" href="@Url.Action("Details", "Products", new {id = item.Id})"><spam class="glyphicon glyphicon-search"></spam></a>
-
-                    @Html.ActionLink("Edition", "Edit", new { id = item.Id }, new { @class = "btn btn-info" }).AllowExibition("Product", "Edition");
-
-                    @*<a class="btn btn-info" href="@Url.Action("Edit", "Products", new {id = item.Id})"><spam class="glyphicon glyphicon-edit"></spam></a>*@
+                    <a class="btn btn-info" href="@Url.Action("Edit", "Products", new {id = item.Id})"><spam class="glyphicon glyphicon-edit"></spam></a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Products", new { id = item.Id })"><spam class="glyphicon glyphicon-trash"></spam></a>
                     
-                    @{
-                        if (this.AllowExibition("Product", "Add"))
-                        {
-                            <p>
-                                <a class="btn btn-danger" href="@Url.Action("Delete", "Products", new { id = item.Id })"><spam class="glyphicon glyphicon-trash"></spam></a>
-                            </p>
-                        }
-                    }
                 </td>
             </tr>
         }
